@@ -22,5 +22,6 @@ namespace MVC5Course.Models.ViewModels
         [Required]
         [DisplayName("庫存")]
         public Nullable<decimal> Stock { get; set; }
+
     }
 }

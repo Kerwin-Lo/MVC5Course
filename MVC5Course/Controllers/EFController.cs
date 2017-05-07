@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity.Validation;
 using MVC5Course.Models;
 namespace MVC5Course.Controllers
 {
@@ -13,7 +14,7 @@ namespace MVC5Course.Controllers
         public ActionResult Index()
         {
             var all = db.Product.AsQueryable();
-            var result = all.Where(p=>p.Active==true).OrderByDescending(p => p.ProductId).Take(10);
+            var result = all.Where(p=>p.Active==true && p.Is刪除==false).OrderByDescending(p => p.ProductId).Take(10);
             return View(result);
         }
 
@@ -57,25 +58,35 @@ namespace MVC5Course.Controllers
             return View(product);
         }
 
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            var result = db.Product.Find(id);
-            //if (id == null)
-            //{
-            //   // return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            if (result == null)
-            {
-                return HttpNotFound();
-            }
+            var result = db.Database.SqlQuery<Product>("SELECT * FROM dbo.Product WHERE ProductId=@p0", id).FirstOrDefault();
             return View(result);
         }
 
         public ActionResult Delete(int id)
         {
+
             var product = db.Product.Find(id);
-            db.Product.Remove(product);
-            db.SaveChanges();
+            //foreach (var p in product.OrderLine.ToList())
+            //{
+            //    db.OrderLine.Remove(p);
+            //}
+            //db.OrderLine.RemoveRange(product.OrderLine);
+
+            //db.Product.Remove(product);
+            product.Is刪除 = true;
+            try
+            {
+
+                db.SaveChanges();
+
+            }
+            catch (DbEntityValidationException ex)
+            {
+                throw ex;
+            }
+
             return RedirectToAction("Index");
         }
 
