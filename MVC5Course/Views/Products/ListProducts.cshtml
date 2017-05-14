@@ -5,7 +5,15 @@
 }
 
 <h2>ListProducts</h2>
-
+@if( TempData["MyMsg"] !=null)
+ {
+    <h1>@TempData["MyMsg"]</h1> 
+}
+<form method="get">
+    產品名稱 @Html.TextBox("q")
+    庫存 @Html.TextBox("s1")~@Html.TextBox("s2")
+    <button>搜尋</button> 
+</form>     
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
