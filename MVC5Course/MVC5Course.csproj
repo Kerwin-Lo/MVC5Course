@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -46,10 +45,6 @@
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -174,6 +169,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionFilter\LocalOnlyAttribute.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -182,12 +178,16 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\Client1Controller.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\EFController.cs" />
     <Compile Include="Controllers\HelloController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MetroController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="ActionFilter\SharedViewBagAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -286,6 +286,165 @@
   <ItemGroup>
     <Content Include="App_Data\Fabrics.mdf" />
     <Content Include="App_Data\Fabrics_log.ldf" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\calendar.html" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\chart.html" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\bootstrap-responsive.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\bootstrap-responsive.min.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\bootstrap.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\bootstrap.min.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\chosen.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\elfinder.min.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\elfinder.theme.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\font-awesome-ie7.min.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\font-awesome.min.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\fullcalendar.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\glyphicons.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\halflings.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\ie.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\ie9.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\jquery-ui-1.8.21.custom.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\jquery.cleditor.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\jquery.gritter.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\jquery.iphone.toggle.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\jquery.noty.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\noty_theme_default.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\style-forms.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\style-responsive.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\style.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\uniform.default.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\css\uploadify.css" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\file-manager.html" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\font\glyphicons-regular.svg" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\font\glyphiconshalflings-regular.svg" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\form.html" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\gallery.html" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\icon.html" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\arrows-active.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\arrows-normal.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\avatar.jpg" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\bg-input-focus.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\bg-input.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\bg-login.jpg" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\browser-chrome-big.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\browser-firefox-big.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\browser-ie.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\browser-opera.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\browser-safari.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\buttons.gif" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\chat-left%402x.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\chat-left-metro%402x.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\chat-left-metro.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\chat-left.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\chat-right%402x.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\chat-right-metro%402x.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\chat-right-metro.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\chat-right.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\chosen-sprite.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\close-button-white.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\close-button.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\crop.gif" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\dialogs.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\gallery\photo1.jpg" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\gallery\photo10.jpg" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\gallery\photo11.jpg" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\gallery\photo12.jpg" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\gallery\photo13.jpg" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\gallery\photo2.jpg" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\gallery\photo3.jpg" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\gallery\photo4.jpg" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\gallery\photo5.jpg" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\gallery\photo6.jpg" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\gallery\photo7.jpg" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\gallery\photo8.jpg" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\gallery\photo9.jpg" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\glyphicons-halflings-white.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\glyphicons-halflings.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\glyphicons-white.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\glyphicons-white.svg" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\glyphicons.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\glyphicons.svg" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\glyphicons_halflings-white.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\glyphicons_halflings-white.svg" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\glyphicons_halflings.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\glyphicons_halflings.svg" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\icons-big.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\icons-small.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\iphone-style-checkboxes\off-63584.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\iphone-style-checkboxes\on-63584.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\iphone-style-checkboxes\slider_center-63584.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\iphone-style-checkboxes\slider_left-63584.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\iphone-style-checkboxes\slider_right-63584.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\progress.gif" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\quicklook-bg.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\quicklook-icons.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\quote.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\resize.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\slider_r8.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\spinner-mini.gif" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\sprite.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\timeline-bg.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\timeline-left-arrow%402x.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\timeline-left-arrow.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\timeline-right-arrow%402x.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\timeline-right-arrow.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\toolbar.gif" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\toolbar.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\ui-icons_222222_256x240.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\ui-icons_454545_256x240.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\ui-icons_888888_256x240.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\img\uploadify-cancel.png" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\index.html" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\bootstrap.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\bootstrap.min.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\counter.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\custom.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\excanvas.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\fullcalendar.min.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery-1.9.1.min.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery-migrate-1.0.0.min.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery-ui-1.10.0.custom.min.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery.chosen.min.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery.cleditor.min.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery.cookie.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery.dataTables.min.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery.elfinder.min.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery.flot.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery.flot.pie.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery.flot.resize.min.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery.flot.stack.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery.gritter.min.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery.imagesloaded.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery.iphone.toggle.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery.knob.modified.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery.masonry.min.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery.noty.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery.raty.min.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery.sparkline.min.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery.ui.touch-punch.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery.uniform.min.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\jquery.uploadify-3.1.min.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\modernizr.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\js\retina.js" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\login.html" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\messages.html" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\submenu.html" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\submenu2.html" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\submenu3.html" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\table.html" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\tasks.html" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\typography.html" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\ui.html" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\widgets.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -330,6 +489,19 @@
     <Content Include="Models\Fabrics.edmx.diagram">
       <DependentUpon>Fabrics.edmx</DependentUpon>
     </Content>
+    <Content Include="Bootstrap_Metro_Dashboard-master\font\fontawesome-webfont-0.eot" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\font\fontawesome-webfont-62877.eot" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\font\fontawesome-webfont-62877.ttf" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\font\fontawesome-webfont-62877.woff" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\font\glyphicons-regular-0.eot" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\font\glyphicons-regular.eot" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\font\glyphicons-regular.ttf" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\font\glyphicons-regular.woff" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\font\glyphiconshalflings-regular-0.eot" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\font\glyphiconshalflings-regular.eot" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\font\glyphiconshalflings-regular.ttf" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\font\glyphiconshalflings-regular.woff" />
+    <Content Include="Bootstrap_Metro_Dashboard-master\README.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -399,6 +571,24 @@
     <Content Include="Views\EF\Details.cshtml" />
     <Content Include="Views\Shared\SuccessRedirect.cshtml" />
     <Content Include="Views\Client\BatchUpdate.cshtml" />
+    <Content Include="Views\Shared\Error_DbEntityValidationException.cshtml" />
+    <Content Include="Views\Shared\Error_DbUpdateException.cshtml" />
+    <Content Include="Views\Home\VT.cshtml" />
+    <Content Include="Views\Home\RazorTest.cshtml" />
+    <Content Include="Views\Metro\Index.cshtml" />
+    <Content Include="Views\Metro\_ViewStart.cshtml" />
+    <Content Include="Views\Metro\_Layout.cshtml" />
+    <Content Include="Views\Metro\Tasks.cshtml" />
+    <Content Include="Views\Client1\Create.cshtml" />
+    <Content Include="Views\Client1\Delete.cshtml" />
+    <Content Include="Views\Client1\Details.cshtml" />
+    <Content Include="Views\Client1\Edit.cshtml" />
+    <Content Include="Views\Client1\Index.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -409,7 +599,12 @@
     </Content>
     <None Include="Project_Readme.html" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="css\" />
+    <Folder Include="font\" />
+    <Folder Include="img\" />
+    <Folder Include="js\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -443,7 +638,6 @@
       <ErrorText>此專案參考這部電腦上所缺少的 NuGet 封裝。請啟用 NuGet 封裝還原，以下載該封裝。如需詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的檔案是 {0}。</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

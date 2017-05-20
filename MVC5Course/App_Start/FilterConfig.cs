@@ -7,6 +7,7 @@ namespace MVC5Course
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+            //全站使用
             filters.Add(new HandleErrorAttribute());
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -18,10 +19,24 @@ namespace MVC5Course.Controllers
             return View();
         }
 
+        public ActionResult VT()
+        {
+            ViewBag.IsEnabled = false;
+            return View();
+        }
+
+        public ActionResult RazorTest()
+        {
+            int[] data=new int[]{ 1, 2, 3, 4, 5 };
+            return PartialView(data);
+        }
+
+        [SharedViewBag]
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
+            // ViewBag.Message = "Your application description page.";
+            //Thread.Sleep(1500);
+            throw new AggregateException("Error");
             return View();
         }
 

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MVC5Course.Models;
 using MVC5Course.Models.ViewModels;
+using System.Data.Entity.Infrastructure;
 
 namespace MVC5Course.Controllers
 {
@@ -17,6 +18,7 @@ namespace MVC5Course.Controllers
         ProductRepository repo = RepositoryHelper.GetProductRepository();
 
         // GET: Products
+        [OutputCache(Duration = 5, Location = System.Web.UI.OutputCacheLocation.ServerAndClient)]
         public ActionResult Index(bool Active=true)
         {
             var data = repo.GetProduct列表頁所有資料(Active, showAll: false);
@@ -74,9 +76,10 @@ namespace MVC5Course.Controllers
         // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [HandleError(ExceptionType = typeof(DbUpdateException), View = "Error_DbUpdateException")]
         public ActionResult Create([Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product)
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
             {
                 //db.Product.Add(product);
                 //db.SaveChanges();
@@ -169,16 +172,25 @@ namespace MVC5Course.Controllers
         // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product)
+        //public ActionResult Edit([Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product)
+        public ActionResult Edit(int id,FormCollection fc)
         {
-            if (ModelState.IsValid)
+            var product= repo.Get單筆資料ByProductId(id);
+            if (TryUpdateModel(product,
+                //要驗證的屬性
+                new string[] { "ProductId", "ProductName", "Price", "Active", "Stock" }))
             {
-                //db.Entry(product).State = EntityState.Modified;
-                //db.SaveChanges();
-                repo.Update(product);
                 repo.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
+            //if (ModelState.IsValid)
+            //{
+            //    //db.Entry(product).State = EntityState.Modified;
+            //    //db.SaveChanges();
+            //    repo.Update(product);
+            //    repo.UnitOfWork.Commit();
+            //    return RedirectToAction("Index");
+            //}
             return View(product);
         }
 

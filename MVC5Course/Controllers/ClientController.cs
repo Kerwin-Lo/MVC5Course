@@ -19,8 +19,8 @@ namespace MVC5Course.Controllers
 
         private void GetClients()
         {
-            var data = db.Client.OrderByDescending(c => c.ClientId).Take(10);
-            ViewData.Model = data;
+            var result = db.Client.OrderByDescending(c => c.ClientId).Take(10);
+            ViewData.Model = result;
         }
 
         [HttpPost]
@@ -29,7 +29,6 @@ namespace MVC5Course.Controllers
             if (ModelState.IsValid)
             {
                 foreach (var item in items)
-
                 {
                     var c = db.Client.Find(item.ClientId);
                     c.FirstName = item.FirstName;
