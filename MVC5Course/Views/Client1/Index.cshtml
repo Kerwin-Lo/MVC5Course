@@ -7,8 +7,15 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    @using (Html.BeginForm("Index", "Client1", FormMethod.Get))
+    {
+        <p>
+            RatingFilter： @Html.DropDownList("CreditRatingFilter", "請選擇")
+            LastName： @Html.DropDownList("LastNameFilter", "請選擇")
+            <input type="submit" class="btn btn-primary" value="Search">
+        </p> 
+    }
 <table class="table">
     <tr>
         <th>

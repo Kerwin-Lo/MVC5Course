@@ -57,8 +57,11 @@ namespace MVC5Course.Models
         public Nullable<bool> Active { get; set; }
         [DisplayName("庫存")]
         public Nullable<decimal> Stock { get; set; }
+
         [DisplayName("建立時間")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm:ss}", HtmlEncode = true)]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm:ss}", HtmlEncode = true)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode =true)]
         public System.DateTime CreateDate { get; set; }
 
         public virtual ICollection<OrderLine> OrderLine { get; set; }

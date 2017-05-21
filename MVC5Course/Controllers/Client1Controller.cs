@@ -15,10 +15,26 @@ namespace MVC5Course.Controllers
         private FabricsEntities db = new FabricsEntities();
 
         // GET: Client1
-        public ActionResult Index()
+        public ActionResult Index(int creditRatingFilter=-1, string lastNameFilter="")
         {
-            var client = db.Client.Include(c => c.Occupation).Take(10);
-            return View(client.ToList());
+            var ratings = (from p in db.Client
+                           select p.CreditRating).Distinct().OrderBy(p => p).ToList();
+            ViewBag.CreditRatingFilter = new SelectList(ratings);
+
+            var lastNames = (from p in db.Client
+                            select p.LastName).Distinct().OrderBy(p => p).ToList();
+            ViewBag.LastNameFilter = new SelectList(lastNames);
+
+            var client = db.Client.AsQueryable();
+            if (creditRatingFilter>=0)
+            {
+                client = client.Where(c => c.CreditRating == creditRatingFilter);
+            }
+            if (!String.IsNullOrEmpty(lastNameFilter))
+            {
+                client = client.Where(c => c.LastName == lastNameFilter);
+            }
+            return View(client.Take(10).ToList());
         }
 
         // GET: Client1/Details/5
@@ -73,6 +89,17 @@ namespace MVC5Course.Controllers
             {
                 return HttpNotFound();
             }
+
+            var sli = new List<SelectListItem>();
+            int i = 0;
+            while (i < 10)
+            {
+                sli.Add(new SelectListItem() { Text = i.ToString(), Value = i.ToString() });
+                i++;
+            }
+            ViewBag.CreditRating = new SelectList(sli, "Value", "Text");
+            ViewBag.ddlCreditRating = new SelectList(sli, "Value", "Text");
+
             ViewBag.OccupationId = new SelectList(db.Occupation, "OccupationId", "OccupationName", client.OccupationId);
             return View(client);
         }
